@@ -1,0 +1,10 @@
+Number 0: 61
+Number 1: 31
+Number 2: 81
+Number 3: 86
+Number 4: 40
+Number 5: 79
+Number 6: 66
+Number 7: 73
+Number 8: 10
+Number 9: 50
