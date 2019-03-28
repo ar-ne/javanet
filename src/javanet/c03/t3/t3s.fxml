@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ 2019.
+  ~ @Author 16201235@stu.nchu.edu.cn
+  -->
+
+<!--
+  ~ 2019.
+  ~ @Author 16201235@stu.nchu.edu.cn
+  -->
+
+<?import javafx.scene.control.Button?><?import javafx.scene.control.TableColumn?><?import javafx.scene.control.TableView?><?import javafx.scene.control.TextArea?><?import javafx.scene.layout.HBox?><?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+    minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
+    fx:controller="e3.t3.t3">
+    <children>
+        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0"
+            prefWidth="600.0" fx:id="createClient">
+            <children>
+                <TableView prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                        <TableColumn prefWidth="149.0" text="ServerThread" fx:id="list" />
+                    </columns>
+                </TableView>
+                <TextArea prefHeight="400.0" prefWidth="500.0" fx:id="msg" />
+            </children>
+        </HBox>
+        <Button mnemonicParsing="false" onAction="#newClient" text="New Client" />
+    </children>
+</VBox>
