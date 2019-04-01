@@ -1,4 +1,4 @@
-package javanet.l3;
+package javanet.l03;
 
 import java.io.DataInputStream;
 import java.io.IOException;

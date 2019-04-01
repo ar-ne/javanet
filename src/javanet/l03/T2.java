@@ -1,4 +1,4 @@
-package javanet.l3;
+package javanet.l03;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

@@ -18,7 +18,7 @@
  * @Author 16201235@stu.nchu.edu.cn
  */
 
-package javanet.l04;
+package javanet.e04;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

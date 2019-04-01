@@ -1,4 +1,4 @@
-package javanet.l2;
+package javanet.l02;
 
 public class T2 {
     public static void x() {

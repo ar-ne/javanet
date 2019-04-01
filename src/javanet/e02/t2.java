@@ -8,7 +8,7 @@
  * @Author 16201235@stu.nchu.edu.cn
  */
 
-package javanet.l02;
+package javanet.e02;
 
 import java.util.Iterator;
 import java.util.Map;

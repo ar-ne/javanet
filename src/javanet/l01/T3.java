@@ -1,4 +1,4 @@
-package javanet.l1;
+package javanet.l01;
 
 import java.io.File;
 import java.io.IOException;

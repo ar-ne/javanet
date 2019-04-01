@@ -1,4 +1,4 @@
-package javanet.l2;
+package javanet.l02;
 
 import java.util.ArrayList;
 import java.util.Scanner;

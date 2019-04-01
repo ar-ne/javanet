@@ -8,7 +8,7 @@
  * @Author 16201235@stu.nchu.edu.cn
  */
 
-package javanet.l03;
+package javanet.e03;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
