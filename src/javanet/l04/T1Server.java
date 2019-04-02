@@ -20,23 +20,25 @@ public class T1Server extends Application {
 
     public static void main(String[] args) {
         new Thread(() -> {
+            System.out.println("Server Thread");
             ExecutorService service = Executors.newFixedThreadPool(32);
-            while (GUI == null) ;
+            while (GUI == null) System.out.println("Waiting GUI");
             System.out.println("GUI started");
-            while (true) {
-                try {
-                    DatagramSocket socket = new DatagramSocket(65534);
+            try {
+                DatagramSocket socket = new DatagramSocket(65534);
+                while (true) {
                     byte[] bytes = new byte[16];
                     DatagramPacket packet = new DatagramPacket(bytes, bytes.length);
                     System.out.println("Waiting...");
                     socket.receive(packet);
                     service.submit(() -> ServerThread(packet.getData(), packet.getPort()));
-                } catch (SocketException e) {
-                    System.out.println("Can not bind port!");
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+            } catch (SocketException e) {
+                System.out.println("Can not bind port!");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
         }).start();
         launch(args);
     }

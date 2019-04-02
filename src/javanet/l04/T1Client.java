@@ -34,11 +34,12 @@ public class T1Client extends Thread {
                 }
             }
             System.out.println("localPort : " + localPort);
+            int counter = 0;
             while (running) {
                 byte[] bytes = ByteBuffer.allocate(16).putLong(Calendar.getInstance().getTime().getTime()).putDouble(Math.random() * 200 - 100).array();
                 DatagramPacket packet = new DatagramPacket(bytes, bytes.length, host, port);
                 socket.send(packet);
-                System.out.println("Packet send!");
+                System.out.println(localPort + " => Packet send! " + counter++);
                 Thread.sleep(1000);
             }
         } catch (Exception e) {
