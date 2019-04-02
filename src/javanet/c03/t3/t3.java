@@ -100,7 +100,7 @@ public class t3 extends Application {
                 List<Double> list = new ArrayList<>();
                 for (int i = 0; i < s; i++)
                     list.add(buffer.getDouble());
-                record.socket.getOutputStream().write(e3.t2.t3.results(list));
+                record.socket.getOutputStream().write(javanet.c03.t2.t3.results(list));
                 serverMsgQueue.add(prefix + "Response send");
             }
         } catch (SocketException ignored) {

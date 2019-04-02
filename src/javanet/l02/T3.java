@@ -24,7 +24,7 @@ public class T3 {
         @Override
         public void run() {
             try {
-                l1.T2.copy(x1, x2);
+                javanet.l01.T2.copy(x1, x2);
             } catch (IOException e) {
                 e.printStackTrace();
             }
