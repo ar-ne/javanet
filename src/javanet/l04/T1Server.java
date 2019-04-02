@@ -16,13 +16,20 @@ import java.util.concurrent.Executors;
 
 public class T1Server extends Application {
     private static T1ServerGUI GUI = null;
-    private static long t0 = Calendar.getInstance().getTime().getTime();
+    public static final long t0 = Calendar.getInstance().getTime().getTime();
 
     public static void main(String[] args) {
         new Thread(() -> {
             System.out.println("Server Thread");
             ExecutorService service = Executors.newFixedThreadPool(32);
-            while (GUI == null) System.out.println("Waiting GUI");
+            System.out.println("Waiting GUI");
+            while (GUI == null) {
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             System.out.println("GUI started");
             try {
                 DatagramSocket socket = new DatagramSocket(65534);

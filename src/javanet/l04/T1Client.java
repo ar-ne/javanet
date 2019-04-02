@@ -11,9 +11,11 @@ public class T1Client extends Thread {
     private boolean running = true;
 
     public static void main(String[] args) throws InterruptedException {
-        while (true) {
-            new T1Client().start();
-            Thread.sleep((long) (Math.random() * 5000));
+        for (int i = 0; i < 3; i++) {
+            {
+                new T1Client().start();
+                Thread.sleep((long) (Math.random() * 5000));
+            }
         }
 
     }
