@@ -56,4 +56,4 @@ hs_err_pid*
 out/
 gen/
 1.ppk
-OnClassTest/
+!/lib/
