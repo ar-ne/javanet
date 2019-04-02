@@ -14,6 +14,11 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class T1ServerGUI extends Pane {
     ChartData data = new ChartData();
+    private ConcurrentLinkedQueue<Pair<Integer, XYChart.Data<Number, Number>>> pending = new ConcurrentLinkedQueue<>();
+
+    public void put(Integer ID, Number time, Number temp) {
+        pending.add(new Pair<>(ID, new XYChart.Data<>(time, temp)));
+    }
 
     public T1ServerGUI() {
         //defining the axes
@@ -35,39 +40,36 @@ public class T1ServerGUI extends Pane {
     class ChartData extends Task<ObservableList<XYChart.Series<Number, Number>>> {
         private ObservableList<XYChart.Series<Number, Number>> list = FXCollections.observableArrayList();
         private HashMap<Integer, Integer> posMap = new HashMap<>();
-        private ConcurrentLinkedQueue<Pair<Integer, XYChart.Data<Number, Number>>> pending = new ConcurrentLinkedQueue<>();
 
         private void addSeries(Integer ID) {
+            ObservableList<XYChart.Series<Number, Number>> nl = FXCollections.observableArrayList(list);
             XYChart.Series<Number, Number> series = new XYChart.Series<>();
             series.setName(String.valueOf(ID));
-            posMap.put(ID, list.size());
-            list.add(series);
-        }
-
-        public void put(Integer ID, Number time, Number temp) {
-            pending.add(new Pair<>(ID, new XYChart.Data<>(time, temp)));
+            if (ID == -1) series.setName("Avg.");
+            posMap.put(ID, nl.size());
+            nl.add(series);
+            list = nl;
         }
 
         private void update(int maxAmount) {
+            System.out.println(pending.size());
             if (!pending.isEmpty()) {
                 for (int i = 0; i < maxAmount; i++) {
                     Pair<Integer, XYChart.Data<Number, Number>> dataPair = pending.poll();
                     if (dataPair == null) break;
                     if (!posMap.containsKey(dataPair.getKey())) addSeries(dataPair.getKey());
-                    list.get(dataPair.getKey()).getData().add(dataPair.getValue());
+                    list.get(posMap.get(dataPair.getKey())).getData().add(dataPair.getValue());
                 }
             }
         }
 
         @Override
         protected ObservableList<XYChart.Series<Number, Number>> call() throws Exception {
-            int i = 0, j = 0;
-            while (isRunning()) {
+            while (true) {
                 update(10);
                 updateValue(list);
                 Thread.sleep(100);
             }
-            return null;
         }
     }
 }

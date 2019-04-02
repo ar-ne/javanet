@@ -10,8 +10,12 @@ import java.util.Calendar;
 public class T1Client extends Thread {
     private boolean running = true;
 
-    public static void main(String[] args) {
-        new T1Client().start();
+    public static void main(String[] args) throws InterruptedException {
+        while (true) {
+            new T1Client().start();
+            Thread.sleep((long) (Math.random() * 5000));
+        }
+
     }
 
     private static int randPort() {

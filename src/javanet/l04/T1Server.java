@@ -49,7 +49,7 @@ public class T1Server extends Application {
             ByteBuffer buffer = ByteBuffer.wrap(data);
             Number time = (new Date(buffer.getLong()).getTime() - t0) / 1000;
             Number temp = buffer.getDouble();
-            GUI.data.put(ClientPort, time, temp);
+            GUI.put(ClientPort, time, temp);
         } catch (Exception e) {
             e.printStackTrace();
         }
