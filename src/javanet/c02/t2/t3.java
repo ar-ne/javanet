@@ -3,11 +3,6 @@
  * @Author 16201235@stu.nchu.edu.cn
  */
 
-/*
- * 2019.
- * @Author 16201235@stu.nchu.edu.cn
- */
-
 package javanet.c02.t2;
 
 //3.	利用线程通知机制编写一个Java多线程程序，模拟商店对某件商品的进货与销售过程并将相关信息打印出来，具体要求如下：

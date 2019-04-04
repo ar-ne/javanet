@@ -3,11 +3,6 @@
  * @Author 16201235@stu.nchu.edu.cn
  */
 
-/*
- * 2019.
- * @Author 16201235@stu.nchu.edu.cn
- */
-
 package javanet.c02.t2;
 
 //1.	利用线程同步机制编写一个Java多线程程序，模拟100个球迷抢购20张门票的过程。

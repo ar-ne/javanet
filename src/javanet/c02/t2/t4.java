@@ -3,11 +3,6 @@
  * @Author 16201235@stu.nchu.edu.cn
  */
 
-/*
- * 2019.
- * @Author 16201235@stu.nchu.edu.cn
- */
-
 package javanet.c02.t2;
 
 import java.util.*;
