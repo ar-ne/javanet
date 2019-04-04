@@ -43,17 +43,22 @@ public class T1ServerGUI extends Pane {
         xAxis.setLabel("时间 (t/s)");
         yAxis.setLabel("温度 (T/℃)");
         final LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
+        xAxis.setAnimated(false);
+        xAxis.setScaleShape(false);
         lineChart.setMinWidth(1600);
         lineChart.setMinHeight(900);
         lineChart.setTitle("温度曲线图");
         lineChart.dataProperty().bind(data.valueProperty());
+        data.addSeries(-1);
+        data.list.get(data.posMap.get(-1)).dataProperty().bind(avgTask.valueProperty());
+        new Thread(avgTask).start();
         new Thread(data).start();
         this.getChildren().add(lineChart);
     }
 
     class ChartData extends Task<ObservableList<XYChart.Series<Number, Number>>> {
-        private ObservableList<XYChart.Series<Number, Number>> list = FXCollections.observableArrayList();
-        private HashMap<Integer, Integer> posMap = new HashMap<>();
+        protected ObservableList<XYChart.Series<Number, Number>> list = FXCollections.observableArrayList();
+        protected HashMap<Integer, Integer> posMap = new HashMap<>();
 
         private void addSeries(Integer ID) {
             ObservableList<XYChart.Series<Number, Number>> nl = FXCollections.observableArrayList(list);
@@ -81,14 +86,10 @@ public class T1ServerGUI extends Pane {
 
         @Override
         protected ObservableList<XYChart.Series<Number, Number>> call() throws Exception {
-            put(-1, 0, 0);
-            update(1);
-            list.get(posMap.get(-1)).dataProperty().bind(avgTask.valueProperty());
-            Thread.sleep(100);
             while (true) {
                 update(10);
                 updateValue(list);
-                Thread.sleep(100);
+                Thread.sleep(1000);
             }
         }
     }
