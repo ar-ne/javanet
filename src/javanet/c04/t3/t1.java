@@ -11,6 +11,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
@@ -51,6 +52,25 @@ public class t1 extends Application {
     private static void response(DatagramSocket socket, byte[] data, int length, InetAddress host, int port) {
         try {
             if (!clients.containsKey(port)) clients.put(port, new Client(quesionts));
+            Client client = clients.get(port);
+            ByteBuffer buffer32 = ByteBuffer.allocate(32).putInt(client.score);
+            switch (length) {
+                case 32:
+                    socket.send(new DatagramPacket(buffer32.array(), buffer32.array().length, host, port));
+                    break;
+                case 10240:
+                    client.judge(new String(data));
+                    if (client.questionLeft() <= 0)
+                        socket.send(new DatagramPacket(buffer32.array(), buffer32.array().length, host, port));
+                    else {
+                        ByteBuffer buffer = ByteBuffer.allocate(10240).put(client.getNewQuestion().getBytes());
+                        socket.send(new DatagramPacket(buffer.array(), buffer.array().length, host, port));
+                    }
+                    break;
+                default:
+                    System.out.println("wrong packet from " + port);
+            }
+
         } catch (Exception ignored) {
         }
     }
@@ -75,6 +95,15 @@ public class t1 extends Application {
         String getNewQuestion() {
             currentQuestion = userQuestion.get(userQuestion.keySet().toArray(new String[0])[(int) (Math.random() * userQuestion.size())]);
             return currentQuestion;
+        }
+
+        void judge(String answer) {
+            if (answer.equals(userQuestion.get(currentQuestion))) score++;
+            userQuestion.remove(currentQuestion);
+        }
+
+        int questionLeft() {
+            return userQuestion.size();
         }
     }
 }
