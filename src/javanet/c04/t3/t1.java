@@ -1,5 +1,6 @@
 package javanet.c04.t3;
 
+import com.rits.cloning.Cloner;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +11,6 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
@@ -21,10 +21,12 @@ import java.util.concurrent.Executors;
 //每答完一题客户端可以选择继续答题或结束答题；
 //结束答题后，客户端可以查看自己的成绩；
 //客户端基于Java FX实现，服务端基于多线程技术实现，考试题存储在文件当中。
+
+//使用额外额cloning库 https://github.com/kostaskougios/cloning
 public class t1 extends Application {
     private static DatagramSocket socket;
     private static ConcurrentHashMap<Integer, Client> clients;
-    ArrayList<String> quesionts
+    private static HashMap<String, String> quesionts;
     private static ExecutorService service = Executors.newFixedThreadPool(32);
 
 
@@ -48,7 +50,7 @@ public class t1 extends Application {
 
     private static void response(DatagramSocket socket, byte[] data, int length, InetAddress host, int port) {
         try {
-            if (!clients.containsKey(port)) clients.put(port, new Client())
+            if (!clients.containsKey(port)) clients.put(port, new Client(quesionts));
         } catch (Exception ignored) {
         }
     }
@@ -60,17 +62,18 @@ public class t1 extends Application {
         ((ClientCon) loader.getController()).init(x, InetAddress.getLocalHost(), socket.getPort());
     }
 
-    class Client {
+    static class Client {
         int score = 0;
         HashMap<String, String> userQuestion;
         String currentQuestion;
 
         Client(HashMap<String, String> questions) {
-            this.userQuestion = (HashMap<String, String>) questions.clone();
+            Cloner cloner = new Cloner();
+            this.userQuestion = cloner.deepClone(questions);
         }
 
         String getNewQuestion() {
-            currentQuestion = userQuestion.get(userQuestion.keySet().toArray(new String[0])[(int) (Math.random() * userQuestion.size())])
+            currentQuestion = userQuestion.get(userQuestion.keySet().toArray(new String[0])[(int) (Math.random() * userQuestion.size())]);
             return currentQuestion;
         }
     }
