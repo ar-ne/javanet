@@ -7,13 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.nio.ByteBuffer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -32,10 +32,16 @@ public class ClientCon extends Stage {
         setScene(new Scene(root));
         continued.setOnAction(event -> {
             setDisable(true);
-            String answer = getAnswer();
-            if (answer.length() > 0) {
+            if (getAnswer().length() > 0) {
                 try {
-                    socket.send(new DatagramPacket(answer.getBytes(), answer.getBytes().length, host, port));
+                    socket.send(new DatagramPacket(ByteBuffer.allocate(10240).put(getAnswer().getBytes()).array(), 10240, host, port));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    byte[] bytes = new byte[32];
+                    socket.send(new DatagramPacket(bytes, bytes.length, host, port));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -52,6 +58,7 @@ public class ClientCon extends Stage {
                 e.printStackTrace();
             }
         });
+        question.setText("开始答题，请点击\"继续答题\"按钮");
         show();
     }
 
@@ -59,7 +66,7 @@ public class ClientCon extends Stage {
         answer.setDisable(b);
         continued.setDisable(b);
         breaks.setDisable(b);
-        question.setText("等待响应...");
+        if (b) question.setText("等待响应...");
     }
 
     private String getAnswer() {
@@ -72,8 +79,8 @@ public class ClientCon extends Stage {
             DatagramPacket packet = new DatagramPacket(bytes, bytes.length);
             socket.receive(packet);
             Platform.runLater(() -> {
-                this.question.setText(new String(packet.getData()));
-                this.setDisable(false);
+                question.setText(new String(packet.getData()));
+                setDisable(false);
             });
         } catch (IOException e) {
             e.printStackTrace();

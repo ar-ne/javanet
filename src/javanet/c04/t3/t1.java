@@ -6,6 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -24,6 +27,7 @@ import java.util.concurrent.Executors;
 //客户端基于Java FX实现，服务端基于多线程技术实现，考试题存储在文件当中。
 
 //使用额外额cloning库 https://github.com/kostaskougios/cloning
+//cloning库依赖于objenesis，http://objenesis.org
 public class t1 extends Application {
     private static DatagramSocket socket;
     private static ConcurrentHashMap<Integer, Client> clients;
@@ -34,6 +38,7 @@ public class t1 extends Application {
     public static void main(String[] args) throws SocketException {
         socket = new DatagramSocket(0);
         clients = new ConcurrentHashMap<>();
+        quesionts = loadQuestion();
         new Thread(() -> {
             while (true) {
                 try {
@@ -49,6 +54,28 @@ public class t1 extends Application {
         launch(args);
     }
 
+    private static HashMap<String, String> loadQuestion() {
+        HashMap<String, String> map = new HashMap<>();
+        File f = new File("questions.txt");
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(f));
+            String line;
+            int x = 0;
+            String q = "";
+            while ((line = reader.readLine()) != null) {
+                if (x == 0 && q.length() == 0) q = line;
+                if (x == 1) {
+                    map.put(q, line);
+                    q = "";
+                }
+                x++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
     private static void response(DatagramSocket socket, byte[] data, int length, InetAddress host, int port) {
         try {
             if (!clients.containsKey(port)) clients.put(port, new Client(quesionts));
@@ -56,16 +83,14 @@ public class t1 extends Application {
             ByteBuffer buffer32 = ByteBuffer.allocate(32).putInt(client.score);
             switch (length) {
                 case 32:
-                    socket.send(new DatagramPacket(buffer32.array(), buffer32.array().length, host, port));
+                    if (!client.started) {
+                        client.started = true;
+                        sendNewQeustion(socket, host, port, client, buffer32);
+                    } else socket.send(new DatagramPacket(buffer32.array(), buffer32.array().length, host, port));
                     break;
                 case 10240:
                     client.judge(new String(data));
-                    if (client.questionLeft() <= 0)
-                        socket.send(new DatagramPacket(buffer32.array(), buffer32.array().length, host, port));
-                    else {
-                        ByteBuffer buffer = ByteBuffer.allocate(10240).put(client.getNewQuestion().getBytes());
-                        socket.send(new DatagramPacket(buffer.array(), buffer.array().length, host, port));
-                    }
+                    sendNewQeustion(socket, host, port, client, buffer32);
                     break;
                 default:
                     System.out.println("wrong packet from " + port);
@@ -75,17 +100,29 @@ public class t1 extends Application {
         }
     }
 
+    private static void sendNewQeustion(DatagramSocket socket, InetAddress host, int port, Client client, ByteBuffer buffer32) throws IOException {
+        if (client.questionLeft() <= 0)
+            socket.send(new DatagramPacket(buffer32.array(), buffer32.array().length, host, port));
+        else {
+            ByteBuffer buffer = ByteBuffer.allocate(10240).put(client.getNewQuestion().getBytes());
+            socket.send(new DatagramPacket(buffer.array(), buffer.array().length, host, port));
+        }
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Client.fxml"));
         Parent x = loader.load();
-        ((ClientCon) loader.getController()).init(x, InetAddress.getLocalHost(), socket.getPort());
+        ((ClientCon) loader.getController()).init(x, InetAddress.getLocalHost(), socket.getLocalPort());
+        ((ClientCon) loader.getController()).setOnHiding(event -> System.exit(0));
+        ((ClientCon) loader.getController()).setOnHidden(event -> System.exit(0));
     }
 
     static class Client {
         int score = 0;
         HashMap<String, String> userQuestion;
         String currentQuestion;
+        boolean started = false;
 
         Client(HashMap<String, String> questions) {
             Cloner cloner = new Cloner();
