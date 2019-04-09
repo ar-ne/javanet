@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?><?import javafx.scene.layout.HBox?><?import javafx.scene.layout.VBox?><?import javafx.scene.shape.Circle?><?import javafx.scene.shape.Rectangle?>
+<HBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+    minWidth="-Infinity" prefHeight="250.0" prefWidth="30.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
+    fx:controller="javanet.l05.Bus">
+    <children>
+        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0"
+            prefWidth="7.5">
+            <children>
+                <Rectangle arcHeight="5.0" fill="#1f93ff" height="5.0" smooth="false" stroke="TRANSPARENT"
+                    strokeType="INSIDE" strokeWidth="0.0" translateY="30.0" width="15.0" />
+            </children>
+        </VBox>
+        <VBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="250.0" prefWidth="15.0">
+            <children>
+                <Circle fill="DODGERBLUE" radius="7.5" stroke="TRANSPARENT" strokeType="INSIDE" translateY="10.0" />
+                <Label prefHeight="200.0" text="中" translateY="20.0" fx:id="text1" />
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="15.0" stroke="TRANSPARENT"
+                    strokeType="INSIDE" width="15.0" fx:id="mark1" />
+            </children>
+        </VBox>
+        <VBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="250.0" prefWidth="7.5">
+            <children>
+                <Rectangle arcHeight="5.0" fill="DODGERBLUE" height="5.0" smooth="false" stroke="TRANSPARENT"
+                    strokeType="INSIDE" strokeWidth="0.0" translateX="-7.0" translateY="30.0" width="15.0" />
+            </children>
+        </VBox>
+    </children>
+</HBox>
