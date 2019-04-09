@@ -1,11 +1,15 @@
 package javanet.l05;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 //1．	编写一个公交车查询系统，该系统由A、B、C三部分组成，
 // 其中A为公交车查询客户端程序；
@@ -29,7 +33,14 @@ public class Launcher extends Application {
         Button C = new Button("程序C:公交车模拟程序(公交)");
         A.setOnAction(event -> {
             primaryStage.hide();
-            new ProgramA();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ClientUI.fxml"));
+                Parent root = loader.load();
+                ((ProgramA) loader.getController()).init(root, loader.getController());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         });
         B.setOnAction(event -> {
             primaryStage.hide();
