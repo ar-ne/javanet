@@ -58,3 +58,7 @@ gen/
 1.ppk
 !/lib/
 cloning
+!/lib/objenesis-3.0.1/objenesis-3.0.1-javadoc.jar
+!/lib/objenesis-3.0.1/objenesis-3.0.1-sources.jar
+!/lib/objenesis-3.0.1/objenesis-3.0.1.jar
+/cloning/
