@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?><?import javafx.scene.layout.HBox?><?import javafx.scene.layout.VBox?><?import javafx.scene.shape.Circle?><?import javafx.scene.shape.Rectangle?>
+<?import javafx.geometry.Insets?><?import javafx.scene.control.Label?><?import javafx.scene.layout.*?><?import javafx.scene.shape.Circle?><?import javafx.scene.shape.Rectangle?><?import javafx.scene.text.Font?>
 <HBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
     minWidth="-Infinity" prefHeight="250.0" prefWidth="30.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
     fx:controller="javanet.l05.Bus">
@@ -9,14 +9,28 @@
             prefWidth="7.5">
             <children>
                 <Rectangle arcHeight="5.0" fill="#1f93ff" height="5.0" smooth="false" stroke="TRANSPARENT"
-                    strokeType="INSIDE" strokeWidth="0.0" translateY="30.0" width="15.0" />
+                    strokeType="INSIDE" strokeWidth="0.0" translateY="44.0" width="15.0" />
             </children>
         </VBox>
         <VBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="250.0" prefWidth="15.0">
+            minWidth="-Infinity" prefHeight="250.0" prefWidth="15.0" spacing="1.0">
             <children>
-                <Circle fill="DODGERBLUE" radius="7.5" stroke="TRANSPARENT" strokeType="INSIDE" translateY="10.0" />
-                <Label prefHeight="200.0" text="中" translateY="20.0" fx:id="text1" />
+                <Circle fill="DODGERBLUE" radius="7.5" stroke="TRANSPARENT" strokeType="INSIDE" translateY="5.0" />
+                <Label alignment="CENTER" maxHeight="15.0" maxWidth="15.0" minHeight="17.0" minWidth="15.0"
+                    prefHeight="15.0" prefWidth="15.0" text="1" fx:id="num">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="192.0" text="中" translateY="10.0"
+                    fx:id="text1">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="15.0" stroke="TRANSPARENT"
                     strokeType="INSIDE" width="15.0" fx:id="mark1" />
             </children>
@@ -25,7 +39,7 @@
             minWidth="-Infinity" prefHeight="250.0" prefWidth="7.5">
             <children>
                 <Rectangle arcHeight="5.0" fill="DODGERBLUE" height="5.0" smooth="false" stroke="TRANSPARENT"
-                    strokeType="INSIDE" strokeWidth="0.0" translateX="-7.0" translateY="30.0" width="15.0" />
+                    strokeType="INSIDE" strokeWidth="0.0" translateX="-7.0" translateY="44.0" width="15.0" />
             </children>
         </VBox>
     </children>

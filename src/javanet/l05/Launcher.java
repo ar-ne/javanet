@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.InetAddress;
 
 //1．	编写一个公交车查询系统，该系统由A、B、C三部分组成，
 // 其中A为公交车查询客户端程序；
@@ -36,7 +37,7 @@ public class Launcher extends Application {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("ClientUI.fxml"));
                 Parent root = loader.load();
-                ((ProgramA) loader.getController()).init(root, loader.getController());
+                ((ProgramA) loader.getController()).init(root, loader.getController(), InetAddress.getLocalHost(), 65500);
             } catch (IOException e) {
                 e.printStackTrace();
             }

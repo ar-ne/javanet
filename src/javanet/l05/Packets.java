@@ -9,11 +9,11 @@ import java.util.LinkedList;
 public class Packets {
     private final static Charset charset = StandardCharsets.UTF_8;
 
-    private static byte[] getBytes(String str) {
+    public static byte[] getBytes(String str) {
         return str.getBytes(charset);
     }
 
-    private static String getString(byte[] bytes) {
+    public static String getString(byte[] bytes) {
         return new String(bytes, charset);
     }
 
@@ -36,7 +36,7 @@ public class Packets {
          * @param bus_id 线路号
          * @return 查询请求
          */
-        public static byte[] clientQuery(Integer bus_id) {
+        public static byte[] clientQuery(String bus_id) {
             return getBytes("1\n" + bus_id + "\n");
         }
 
@@ -57,8 +57,13 @@ public class Packets {
          * @param bus 公交类实例
          * @return 公交位置
          */
-        public static byte[] busPosition(Bus bus) {
-            return getBytes("2\n" + bus.pos + "\n");
+        public static byte[] busPositionList(Bus[] bus) {
+            StringBuilder builder = new StringBuilder().append("2\n");
+            for (Bus bus1 : bus) {
+                builder.append(bus1.pos).append("\n");
+            }
+            builder.append("\n");
+            return getBytes(builder.toString());
         }
     }
 
@@ -67,8 +72,8 @@ public class Packets {
          * @param data 收到的数据
          * @return 被查询的线路号
          */
-        public static Integer clientQuery(String data) {
-            return Integer.parseInt(data.substring(1).trim());
+        public static String clientQuery(String data) {
+            return data.substring(1).trim();
         }
 
         /**

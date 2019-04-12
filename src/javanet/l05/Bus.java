@@ -1,10 +1,11 @@
 package javanet.l05;
 
+import com.rits.cloning.Cloner;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
 
-import java.awt.*;
 import java.util.LinkedList;
 
 public class Bus {
@@ -13,22 +14,23 @@ public class Bus {
      * 公交位置，未发车则pos==-1
      */
     int pos = -1;
-    int id;
+    String id;
     Task<Integer> positionTask;
     @FXML
-    Label text1;
+    Label text1, num;
     @FXML
     Rectangle mark1;
 
     public void setStops(LinkedList<String> stops) {
-        this.stops = stops;
+        Cloner cloner = new Cloner();
+        this.stops = cloner.deepClone(stops);
     }
 
     public void setPos(int pos) {
         this.pos = pos;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -37,6 +39,12 @@ public class Bus {
         for (int i = 0; i < string.length(); i++)
             builder.append(string.charAt(i)).append("\n");
         text1.setText(builder.toString());
+    }
+
+    public void init(int number, String stopName) {
+        num.setText(number + "");
+        setText1(stopName);
+        toggleMark();
     }
 
     public void toggleMark() {
@@ -58,5 +66,18 @@ public class Bus {
                 }
             }
         };
+    }
+
+    @Override
+    public String toString() {
+        return "Bus{" +
+                "stops=" + stops +
+                ", pos=" + pos +
+                ", id='" + id + '\'' +
+                ", positionTask=" + positionTask +
+                ", text1=" + text1 +
+                ", num=" + num +
+                ", mark1=" + mark1 +
+                '}';
     }
 }
