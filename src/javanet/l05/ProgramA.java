@@ -31,6 +31,9 @@ public class ProgramA extends Stage {
     ExecutorService service = Executors.newFixedThreadPool(1);
     private ProgramA controller;
 
+    public ProgramA() {
+    }
+
     @FXML
     void query(ActionEvent event) {
         String str = field.getText();
@@ -43,9 +46,6 @@ public class ProgramA extends Stage {
                     }
                 });
             });
-    }
-
-    public ProgramA() {
     }
 
     void init(Parent root, ProgramA controller, InetAddress host, int port) {

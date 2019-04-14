@@ -18,6 +18,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ClientCon extends Stage {
+    private static ExecutorService service = Executors.newFixedThreadPool(1);
     @FXML
     Label question;
     @FXML
@@ -25,7 +26,6 @@ public class ClientCon extends Stage {
     @FXML
     TextArea answer;
     private DatagramSocket socket;
-    private static ExecutorService service = Executors.newFixedThreadPool(1);
 
     void init(Parent root, InetAddress host, int port) throws IOException {
         socket = new DatagramSocket(0);

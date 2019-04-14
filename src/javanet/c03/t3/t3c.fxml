@@ -10,16 +10,17 @@
     minWidth="-Infinity" prefHeight="242.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
     fx:controller="e3.t3.t3c">
     <children>
+        <TextArea prefHeight="158.0" prefWidth="340.0" fx:id="msg">
+            <HBox.margin>
+                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+            </HBox.margin>
+            <padding>
+                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+            </padding>
+        </TextArea>
         <VBox prefHeight="400.0" prefWidth="260.0">
             <children>
-                <TextArea prefHeight="200.0" prefWidth="200.0" promptText="输入多个值，以空格分隔" fx:id="input">
-                    <padding>
-                        <Insets top="5.0" />
-                    </padding>
-                    <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </VBox.margin>
-                </TextArea>
+                <Button mnemonicParsing="false" onAction="#onSubmit" text="提交" fx:id="btn" />
                 <HBox prefHeight="55.0" prefWidth="258.0">
                     <children>
                         <VBox prefHeight="200.0" prefWidth="100.0">
@@ -45,16 +46,15 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </padding>
                 </HBox>
-                <Button mnemonicParsing="false" onAction="#onSubmit" text="提交" fx:id="btn" />
+                <TextArea prefHeight="200.0" prefWidth="200.0" promptText="输入多个值，以空格分隔" fx:id="input">
+                    <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </VBox.margin>
+                    <padding>
+                        <Insets top="5.0" />
+                    </padding>
+                </TextArea>
             </children>
         </VBox>
-        <TextArea prefHeight="158.0" prefWidth="340.0" fx:id="msg">
-            <padding>
-                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-            </padding>
-            <HBox.margin>
-                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-            </HBox.margin>
-        </TextArea>
     </children>
 </HBox>

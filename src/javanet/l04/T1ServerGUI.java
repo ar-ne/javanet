@@ -32,10 +32,6 @@ public class T1ServerGUI extends Pane {
         }
     };
 
-    public void put(Integer ID, Number time, Number temp) {
-        pending.add(new Pair<>(ID, new XYChart.Data<>(time, temp)));
-    }
-
     public T1ServerGUI() {
         //defining the axes
         final NumberAxis xAxis = new NumberAxis();
@@ -54,6 +50,10 @@ public class T1ServerGUI extends Pane {
         new Thread(avgTask).start();
         new Thread(data).start();
         this.getChildren().add(lineChart);
+    }
+
+    public void put(Integer ID, Number time, Number temp) {
+        pending.add(new Pair<>(ID, new XYChart.Data<>(time, temp)));
     }
 
     class ChartData extends Task<ObservableList<XYChart.Series<Number, Number>>> {

@@ -10,6 +10,7 @@
     minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
     fx:controller="e3.t3.t3">
     <children>
+        <Button mnemonicParsing="false" onAction="#newClient" text="New Client" />
         <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0"
             prefWidth="600.0" fx:id="createClient">
             <children>
@@ -21,6 +22,5 @@
                 <TextArea prefHeight="400.0" prefWidth="500.0" fx:id="msg" />
             </children>
         </HBox>
-        <Button mnemonicParsing="false" onAction="#newClient" text="New Client" />
     </children>
 </VBox>

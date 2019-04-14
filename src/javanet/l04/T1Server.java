@@ -15,8 +15,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class T1Server extends Application {
-    private static T1ServerGUI GUI = null;
     public static final long t0 = Calendar.getInstance().getTime().getTime();
+    private static T1ServerGUI GUI = null;
 
     public static void main(String[] args) {
         new Thread(() -> {
