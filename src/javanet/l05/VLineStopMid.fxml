@@ -20,7 +20,7 @@
                 <Rectangle fx:id="mark1" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="15.0" stroke="TRANSPARENT" strokeType="INSIDE" width="15.0" />
                 <Label fx:id="num" alignment="CENTER" maxHeight="15.0" maxWidth="15.0" minHeight="17.0" minWidth="15.0" prefHeight="15.0" prefWidth="15.0" text="1">
                     <font>
-                        <Font name="System Bold" size="15.0" />
+                        <Font name="System Bold" size="10.0" />
                     </font>
                 </Label>
                 <Circle fill="DODGERBLUE" radius="7.5" stroke="TRANSPARENT" strokeType="INSIDE" translateY="5.0" />
