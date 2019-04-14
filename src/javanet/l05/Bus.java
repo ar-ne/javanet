@@ -71,13 +71,14 @@ public class Bus {
     @Override
     public String toString() {
         return "Bus{" +
-                "stops=" + stops +
+                "id='" + id + '\'' +
                 ", pos=" + pos +
-                ", id='" + id + '\'' +
+                ", stops=" + stops +
                 ", positionTask=" + positionTask +
                 ", text1=" + text1 +
                 ", num=" + num +
                 ", mark1=" + mark1 +
+
                 '}';
     }
 }

@@ -55,7 +55,7 @@ public class Packets {
 
         /**
          * @param bus 公交类实例
-         * @return 公交位置
+         * @return 公交位置列表
          */
         public static byte[] busPositionList(Bus[] bus) {
             StringBuilder builder = new StringBuilder().append("2\n");
