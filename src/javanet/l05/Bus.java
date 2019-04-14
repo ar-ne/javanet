@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
 
+import java.net.InetAddress;
 import java.util.LinkedList;
 
 public class Bus {
@@ -14,12 +15,17 @@ public class Bus {
      * 公交位置，未发车则pos==-1
      */
     int pos = -1;
+    int maxPos;
+    int direction = 1;
     String id;
     Task<Integer> positionTask;
     @FXML
     Label text1, num;
     @FXML
     Rectangle mark1;
+    InetAddress host;
+    int port;
+    long posLastUpdate;
 
     public void setStops(LinkedList<String> stops) {
         Cloner cloner = new Cloner();
@@ -34,6 +40,15 @@ public class Bus {
         this.id = id;
     }
 
+    public void flipDirection() {
+        this.direction *= -1;
+    }
+
+    public void moveOn() {
+        if (pos + direction > maxPos || pos + direction < 0) flipDirection();
+        pos += direction;
+    }
+
     public void setText1(String string) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < string.length(); i++)
@@ -45,6 +60,10 @@ public class Bus {
         num.setText(number + "");
         setText1(stopName);
         toggleMark();
+    }
+
+    public void toggleMark(boolean v) {
+        mark1.setVisible(v);
     }
 
     public void toggleMark() {

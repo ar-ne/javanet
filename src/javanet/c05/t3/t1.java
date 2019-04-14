@@ -1,6 +1,6 @@
 package javanet.c05.t3;
 
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.net.URL;
 
 //1.	分析给定的网页，编写一个简单的网络爬虫程序，其要求如下：
@@ -9,8 +9,15 @@ import java.net.URL;
 public class t1 {
     static String target = "http://localhost:8080/jn_16201235_Web_exploded/?a=123&b=456";
 
-    public static void main(String[] args) throws MalformedURLException {
+    public static void main(String[] args) throws IOException {
         URL url = new URL(target);
+        int a = url.openStream().available();
+        byte[] bytes = new byte[a];
+        int ra = url.openStream().read(bytes);
+        String reply = new String(bytes);
+        System.out.println(reply);
+        if (reply.contains("success")) System.out.println("登陆成功");
+        else System.out.println("登陆失败");
 
     }
 }
