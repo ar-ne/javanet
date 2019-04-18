@@ -83,7 +83,7 @@ class Student implements Arraylizeable {
 
 class fclass<T extends Arraylizeable> {
     public boolean autoCommit = false;
-    String fn = "score.data";
+    String fn = "TestData/score.data";
     File file;
     int blockSize;
     List<T> items;

@@ -10,8 +10,8 @@ import java.io.*;
 public class t3 {
     public static void main(String[] args) {
         try {
-            File inFIle = new File("random.txt");
-            File outFIle = new File("test.txt");
+            File inFIle = new File("TestData/random.txt");
+            File outFIle = new File("TestData/test.txt");
             BufferedWriter out = new BufferedWriter(new FileWriter(outFIle, true));
             BufferedReader in = new BufferedReader(new FileReader(inFIle));
             String line;

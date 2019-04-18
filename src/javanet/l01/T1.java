@@ -6,7 +6,7 @@ import java.io.IOException;
 public class T1 {
     public static void main(String[] args) {
         try {
-            FileInputStream fis = new FileInputStream("Test.txt");
+            FileInputStream fis = new FileInputStream("TestData/Test.txt");
             int b, n = 0;
             while ((b = fis.read()) != -1) {
                 System.out.print(" " + Integer.toHexString(b));

@@ -14,7 +14,7 @@ import java.util.List;
 public class t1 {
     public static void main(String[] args) {
         try {
-            File file = new File("test.txt");
+            File file = new File("TestData/test.txt");
             FileReader reader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(reader);
             String str;

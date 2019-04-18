@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class T3 {
     public static void main(String[] args) {
-        File file = new File("Test.txt");
+        File file = new File("TestData/Test.txt");
         for (int i = 0; i < 3; i++) {
             new Copyx(file.getAbsolutePath(), file.getAbsolutePath() + i);
         }

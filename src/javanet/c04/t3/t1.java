@@ -56,7 +56,7 @@ public class t1 extends Application {
 
     private static HashMap<String, String> loadQuestion() {
         HashMap<String, String> map = new HashMap<>();
-        File f = new File("questions.txt");
+        File f = new File("TestData/questions.txt");
         try {
             BufferedReader reader = new BufferedReader(new FileReader(f));
             String line;

@@ -8,7 +8,7 @@ import java.io.IOException;
 public class T2 {
     public static void main(String[] args) {
         try {
-            copy("Test.txt", "Test2.txt");
+            copy("TestData/Test.txt", "TestData/Test2.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -30,7 +30,7 @@ public class ProgramB extends Thread {
     private ExecutorService UDPservice = Executors.newFixedThreadPool(32);
 
     public ProgramB() {
-        loadBusInfo("BusStopInfo.txt");
+        loadBusInfo("TestData/BusStopInfo.txt");
         try {
             TCPsocket = new ServerSocket(0);
             UDPsocket = new DatagramSocket(0);

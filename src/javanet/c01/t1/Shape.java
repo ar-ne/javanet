@@ -28,7 +28,7 @@ class me {
             else l.add(new Rectangle(Math.random() * 85));
         }
         try {
-            OutputStream stream = new FileOutputStream("shapes.data");
+            OutputStream stream = new FileOutputStream("TestData/shapes.data");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(stream);
             for (Shape shape : l) {
                 shape.printInfo();
@@ -46,7 +46,7 @@ class me {
 class meme {
     public static void main(String[] args) {
         List<Shape> l = new ArrayList<>();
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("shapes.data"))) {
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("TestData/shapes.data"))) {
             Object o;
             while ((o = objectInputStream.readObject()) != null) {
                 l.add((Shape) o);

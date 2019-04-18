@@ -12,7 +12,7 @@ import java.io.FileWriter;
 public class t2 {
     public static void main(String[] args) {
         try {
-            File file = new File("random.txt");
+            File file = new File("TestData/random.txt");
             if (file.exists()) {
                 file.delete();
                 file.createNewFile();
