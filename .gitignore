@@ -62,3 +62,5 @@ cloning
 !/lib/objenesis-3.0.1/objenesis-3.0.1-sources.jar
 !/lib/objenesis-3.0.1/objenesis-3.0.1.jar
 /cloning/
+!/lib/annotations-17.0.0.jar
+!/lib/annotations-17.0.0-sources.jar
