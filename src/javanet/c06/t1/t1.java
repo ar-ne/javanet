@@ -1,8 +1,8 @@
 package javanet.c06.t1;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 //1.	自行设计一个简单的对称加密算法，并利用该算法对一篇短文进行加密解密。
 public class t1 {
@@ -36,23 +36,28 @@ public class t1 {
         return c;
     }
 
-    static List<String> readFile(String fn) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(new File(fn)));
-        List<String> list = new ArrayList<>();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            list.add(line);
+    @Nullable
+    public static byte[] readAll(String fn) {
+        FileInputStream fileInputStream = null;
+        try {
+            fileInputStream = new FileInputStream(new File(fn));
+            byte[] data = new byte[fileInputStream.available()];
+            int readed = fileInputStream.read(data);
+            return data;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        reader.close();
-        return list;
+        return null;
     }
 
-    static void writeFile(String fn, List<String> con) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(new File(fn)));
-        for (String s : con) {
-            writer.write(s);
-            writer.newLine();
+    public static void writeAll(String fn, byte[] data) {
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream(new File(fn));
+            fileOutputStream.write(data);
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        writer.close();
     }
 }

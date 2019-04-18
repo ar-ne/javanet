@@ -7,8 +7,6 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
@@ -24,11 +22,9 @@ public class t3 {
     public static final String ALGORITHM = "RSA";
 
     public static void main(String[] args) throws IOException {
-        KeyPair keyPair = gen();
+        KeyPair keyPair = genRSA();
         if (keyPair != null) {
-            FileInputStream fileInputStream = new FileInputStream(new File("TestData/test.txt"));
-            byte[] original = new byte[fileInputStream.available()];
-            int readed = fileInputStream.read(original);
+            byte[] original = t1.readAll("TestData/test.txt");
             byte[] encrypted = encryptByPublicKey(original, encodeKey(keyPair.getPublic()));
             byte[] decrypted = decryptByPrivateKey(encrypted, encodeKey(keyPair.getPrivate()));
 
@@ -104,7 +100,7 @@ public class t3 {
      * @return keyPair or null if something wrong
      */
     @Nullable
-    public static KeyPair gen() {
+    public static KeyPair genRSA() {
         KeyPairGenerator generator = null;
         try {
             generator = KeyPairGenerator.getInstance(ALGORITHM);
